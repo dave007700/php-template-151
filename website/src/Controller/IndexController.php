@@ -1,8 +1,8 @@
 <?php
 
-namespace ihrname\Controller;
+namespace dave007700\Controller;
 
-use ihrname\SimpleTemplateEngine;
+use dave007700\SimpleTemplateEngine;
 
 class IndexController 
 {
