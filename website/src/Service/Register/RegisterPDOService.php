@@ -2,7 +2,7 @@
 
 	namespace dave007700\Service\Register;
 	
-	class RegisterPDOService implements RegisteService
+	class RegisterPDOService implements RegisterService
 	{
 		private $pdo;
 		
@@ -32,14 +32,19 @@
 		{
 			if(filter_var($username, FILTER_VALIDATE_EMAIL))
 			{
-				if(available($username))
+				if($this->available($username))
 				{
-					$stmt = $this->pdo->prepare("INSERT INTO user ('email', 'password') VALUES (?,?)");
-					$stmt->bindValue(1, $username);
-					$stmt->bindValue(2, $password);
-					$stmt->execute();
-					
-					return true;
+					//TODO: Hash the Password
+					try {
+						$stmt = $this->pdo->prepare("INSERT INTO user (email, `password`) VALUES (?,?)");
+						$stmt->bindValue(1, $username);
+						$stmt->bindValue(2, $password);
+						$stmt->execute();
+						
+						return true;
+					} catch(\Exception $e) {
+						var_dump($e);
+					}
 				}
 				else
 				{

@@ -5,22 +5,22 @@ namespace dave007700\Controller;
 use dave007700\SimpleTemplateEngine;
 use dave007700\Service\Register\RegisterService;
 
-class LoginController 
+class RegisterController
 {
   /**
    * @var ihrname\SimpleTemplateEngine Template engines to render output
    */
   private $template;
   
-  private $RegisterService;
+  private $registerService;
   
   /**
    * @param ihrname\SimpleTemplateEngine
    */
-  public function __construct(SimpleTemplateEngine $template, LoginService $registerService)
+  public function __construct(SimpleTemplateEngine $template, RegisterService $registerService)
   {
      $this->template = $template;
-     $this->registerService = $RegisterService;
+     $this->registerService = $registerService;
   }
   
   public function showRegister()

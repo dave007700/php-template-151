@@ -35,7 +35,7 @@ switch($_SERVER["REQUEST_URI"]) {
 		$ctr = $factory->getRegisterController();
 		if($_SERVER["REQUEST_METHOD"] == "GET")
 		{
-			$ctr->showREgister();
+			$ctr->showRegister();
 		}
 		else
 		{
