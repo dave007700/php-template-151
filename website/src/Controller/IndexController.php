@@ -23,7 +23,7 @@ class IndexController
   }
 
   public function homepage() {
-    echo $this->template->render("homepage.html.php", ["username" => $_SESSION['email'], "Movies" => $this->indexService->getAllMovies()]);
+    echo $this->template->render("homepage.html.php", ["taskbar" => $this->indexService->getTaskBar(), "Movies" => $this->indexService->getAllMovies()]);
   }
 
   public function greet($name) {

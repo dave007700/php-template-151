@@ -5,6 +5,7 @@
 	interface IndexService
 	{
 		public  function getAllMovies();
+		public  function getTaskBar();
 	}
 
 ?>
