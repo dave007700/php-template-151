@@ -55,7 +55,7 @@
           <h1 class="page-header">Dashboard</h1>
 
           <div class="row placeholders">
-            <div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">
+            <!--<div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">
               <img src="http://www.impawards.com/2016/posters/xmen_apocalypse_ver18_xxlg.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
@@ -84,9 +84,21 @@
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJBC5XK_HmO30HN3MrDxXOn5N__xm_bwDBOPcw0qpNn60o9ORH_g" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
-            </div>
+            </div>-->
 
-            <?= var_dump($Movies); ?>
+            <?php
+							//var_dump($Movies);
+						 	//var_dump($Movies["BackGroundImgURL"]);
+							foreach ($Movies as $key)
+							{
+								//echo var_dump($value);
+								echo '<div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">';
+		              echo '<img src="'. $key["BackGroundImgURL"] . '" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">';
+		              echo '<h4>'. $key["Name"] . '</h4>';
+		              echo '<span class="text-muted">Release: ' . date("d.m.Y", strtotime($key["ReleaseDate"])) . '</span>';
+		            echo '</div>';
+							}
+						 ?>
 
           </div>
 

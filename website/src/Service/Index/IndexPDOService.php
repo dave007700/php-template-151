@@ -21,7 +21,7 @@
 			$stmt = $this->pdo->prepare("SELECT * FROM movie");
 			$stmt->execute();
 
-			return $stmt->fetch();
+			return $stmt->fetchAll();
 		}
 	}
 
