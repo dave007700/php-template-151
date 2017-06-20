@@ -31,6 +31,10 @@
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
 				<br>
         <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in"></input>
+				<br>
+				<a href="/register"> <button class="btn btn-lg btn-success btn-block" type="button">Register</button> </a>
+				<br>
+				<a href="/ "> <button class="btn btn-lg btn-danger btn-block" type="button">Zurück</button> </a>
       </form>
 
     </div>

@@ -24,6 +24,22 @@
 			return $stmt->fetchAll();
 		}
 
+		public function getMoveByID($MovieID)
+		{
+			$stmt = $this->pdo->prepare("SELECT * FROM movie WHERE ID = ?");
+			$stmt->bindValue(1, $MovieID);
+			$stmt->execute();
+
+			if($stmt->rowCount() === 1)
+			{
+				return $stmt->fetch();
+			}
+			else
+			{
+				return null;
+			}
+		}
+
 		public function getTaskBar()
 		{
 			return '
@@ -40,10 +56,10 @@
 	        </div>
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
-	            <li><a href="#">Dashboard</a></li>
-	            <li><a href="#">Settings</a></li>
-	            <li><a href="#">Profile</a></li>
-	            <li><a href="#">Help</a></li>
+	            <li><a href="/">Dashboard</a></li>
+	            <li><a href="/Settings">Settings</a></li>
+	            <li><a href="/login">Login</a></li>
+	            <li><a href="https://www.google.com">Help</a></li>
 	          </ul>
 	          <form class="navbar-form navbar-right">
 	            <input type="text" class="form-control" placeholder="Search...">

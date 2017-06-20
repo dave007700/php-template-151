@@ -29,4 +29,19 @@ class IndexController
   public function greet($name) {
   	echo $this->template->render("hello.html.php", ["name" => $name]);
   }
+
+  public function movieData($MovieID)
+  {
+    $MovieData = $this->indexService->getMoveByID($MovieID);
+
+    if($MovieData !== null)
+    {
+      echo $this->template->render("movie.html.php", ["taskbar" => $this->indexService->getTaskBar(), "MovieData" => $this->indexService->getMoveByID($MovieID)]);
+    }
+    else
+    {
+      header('Location: /Error-404');
+    }
+
+  }
 }

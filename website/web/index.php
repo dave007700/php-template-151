@@ -49,5 +49,11 @@ switch($_SERVER["REQUEST_URI"]) {
 			$factory->getIndexController()->greet($matches[1]);
 			break;
 		}
+		else if(preg_match("|^/movie=(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
+			$factory->getIndexController()->movieData($matches[1]);
+			break;
+		}
+
+
 		echo "Not Found";
 }
