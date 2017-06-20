@@ -66,6 +66,12 @@
 
           </div>
 
+          <h2 class="sub-header">Kommentare <span class="label label-success label-as-badge">14</span></h2>
+
+          <div class="thumbnail">
+
+          </div>
+
         </div>
       </div>
     </div>
