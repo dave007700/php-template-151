@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<link rel="stylesheet" href="CSS/login.css">
+		<link rel="stylesheet" href="CSS/index.css">
 
 		<!-- Import Ajax From Google Servers -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -21,22 +21,10 @@
 
 	<body>
 
-		<div class="container">
+		<?= $taskbar ?>
 
-      <form class="form-signin" action="" method="POST">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" name="email" id="inputEmail" class="form-control" placeholder="Email address or Username" required="true" autofocus="" value="<?= (isset($email)) ? htmlspecialchars($email) : "" ?>">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="true">
-				<br>
-        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in"></input>
-				<br>
-				<a href="/register"> <button class="btn btn-lg btn-success btn-block" type="button">Register</button> </a>
-				<br>
-				<a href="/ "> <button class="btn btn-lg btn-danger btn-block" type="button">Zurück</button> </a>
-      </form>
-
+    <div class="error404-container">
+      <img src="http://www.404notfound.fr/assets/images/pages/img/androiddev101.jpg" alt="">
     </div>
 
 	</body>

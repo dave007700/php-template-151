@@ -26,6 +26,24 @@ class IndexController
     echo $this->template->render("homepage.html.php", ["taskbar" => $this->indexService->getTaskBar(), "Movies" => $this->indexService->getAllMovies()]);
   }
 
+  public function getError404(){
+    echo $this->template->render("error404.html.php", ["taskbar" => $this->indexService->getTaskBar()]);
+  }
+
+  public function showcreateNewEntry(){
+    if($this->indexService->GetRights() > 1)
+    {
+      echo $this->template->render("createEntry.html.php", [
+        "taskbar" => $this->indexService->getTaskBar(),
+        "UserRights" => $this->indexService->GetRights()
+      ]);
+    }
+    else
+    {
+      $this->getError404();
+    }
+  }
+
   public function greet($name) {
   	echo $this->template->render("hello.html.php", ["name" => $name]);
   }
@@ -36,7 +54,12 @@ class IndexController
 
     if($MovieData !== null)
     {
-      echo $this->template->render("movie.html.php", ["taskbar" => $this->indexService->getTaskBar(), "MovieData" => $this->indexService->getMoveByID($MovieID)]);
+      echo $this->template->render("movie.html.php", [
+        "taskbar" => $this->indexService->getTaskBar(),
+        "MovieData" => $MovieData,
+        "Username" => $this->indexService->GetUsername(),
+        "UserRights" => $this->indexService->GetRights()
+      ]);
     }
     else
     {

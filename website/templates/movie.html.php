@@ -36,6 +36,12 @@
 
               <!--<h1> The Movename is <b><?= htmlspecialchars($MovieData['Name'])?></b></h1>-->
 
+							<?php
+							if($UserRights > 1){
+								echo '<a href="/Edit-Movie='. $MovieData['ID'] .'"> <img src="http://simpleicon.com/wp-content/uploads/pencil.png" alt="" class="edit-pencile" role="button"></a>';
+							}
+							?>
+
               <br>
 
               <div class="col-xs-6 col-sm-2 placeholder">
@@ -61,7 +67,9 @@
 
               <b>Tags: </b> <?= htmlspecialchars($MovieData['Tags'])?>
               <br>
-              <b>PG: </b> <?= htmlspecialchars($MovieData['PG'])?>
+							<br>
+
+              <b>Freigegeben ab: </b> <?= htmlspecialchars($MovieData['PG'])?>
               <br>
 
           </div>

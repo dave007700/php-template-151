@@ -24,12 +24,25 @@ switch($_SERVER["REQUEST_URI"]) {
 		if($_SERVER["REQUEST_METHOD"] == "GET")
 		{
 			$ctr->showLogin();
+			session_destroy();
 		}
 		else
 		{
 			$ctr->login($_POST);
 		}
 		break;
+
+	case "/Error-404":
+		{
+			$factory->getIndexController()->getError404();
+			break;
+		}
+
+	case "/New-Entry":
+		{
+			$factory->getIndexController()->showcreateNewEntry();
+			break;
+		}
 
 	case"/register":
 		$ctr = $factory->getRegisterController();
@@ -54,6 +67,6 @@ switch($_SERVER["REQUEST_URI"]) {
 			break;
 		}
 
-
-		echo "Not Found";
+		$factory->getIndexController()->getError404();
+		//echo "Not Found";
 }

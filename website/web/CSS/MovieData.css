@@ -11,6 +11,18 @@ a{
   text-decoration: none !important;
 }
 
+.edit-pencile{
+  max-height: 32px !important;
+  max-width: 32px !important;
+  float: right;
+}
+
+.edit-pencile:hover{
+  border-style: solid;
+  border-width: 1px;
+  border-color: #B2A2A0;
+  border-radius: 80%;
+}
 
 /*
  * Global add-ons

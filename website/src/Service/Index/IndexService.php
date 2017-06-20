@@ -8,6 +8,10 @@
 		public  function getMoveByID($MovieID);
 
 		public  function getTaskBar();
+
+		public  function CheckLogin();
+		public  function GetUsername();
+		public  function GetRights();
 	}
 
 ?>
