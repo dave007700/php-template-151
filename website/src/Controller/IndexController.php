@@ -4,13 +4,13 @@ namespace dave007700\Controller;
 
 use dave007700\SimpleTemplateEngine;
 
-class IndexController 
+class IndexController
 {
   /**
    * @var ihrname\SimpleTemplateEngine Template engines to render output
    */
   private $template;
-  
+
   /**
    * @param ihrname\SimpleTemplateEngine
    */
@@ -20,7 +20,7 @@ class IndexController
   }
 
   public function homepage() {
-    echo "INDEX";
+    echo $this->template->render("homepage.html.php");
   }
 
   public function greet($name) {
