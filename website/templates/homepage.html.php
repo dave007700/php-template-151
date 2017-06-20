@@ -4,6 +4,7 @@
 
 		<link rel="stylesheet" href="CSS/index.css">
     <link rel="stylesheet" href="CSS/dashboard.css">
+    <link rel="stylesheet" href="CSS/movieCover.css">
 
 		<!-- Import Ajax From Google Servers -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -22,18 +23,6 @@
 
 	<body>
 
-		<!--<h1><center>Is this the Homepage ?</center></h1>
-
-		<br>
-		<br>
-
-    <div class="movieBox"></div>
-    <div class="movieBox"></div>
-
-		<center>
-
-		</center>-->
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -43,7 +32,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Movie Review DB</a>
+          <a class="navbar-brand" href="/">Movie Review DB <?= $username ?></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -66,36 +55,38 @@
           <h1 class="page-header">Dashboard</h1>
 
           <div class="row placeholders">
-            <div class="col-xs-6 col-sm-2 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+            <div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">
+              <img src="http://www.impawards.com/2016/posters/xmen_apocalypse_ver18_xxlg.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
             </div>
-            <div class="col-xs-6 col-sm-2 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+            <div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">
+              <img src="https://s-media-cache-ak0.pinimg.com/originals/bb/ff/10/bbff106591f93093c9693f749bb12d06.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
             </div>
-            <div class="col-xs-6 col-sm-2 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+            <div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">
+              <img src="https://kaneshorrorblog.files.wordpress.com/2010/12/the_dark_knight_movie_poster.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
             </div>
-            <div class="col-xs-6 col-sm-2 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+            <div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYmqQmr5RQkvbC34FMqgoC5bgWitPlC_TgECFScsY7wkjfLlqP" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
             </div>
-            <div class="col-xs-6 col-sm-2 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+            <div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">
+              <img src="http://img.moviepostershop.com/the-magnificent-seven-movie-poster-2016-1020776374.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
             </div>
-            <div class="col-xs-6 col-sm-2 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+            <div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJBC5XK_HmO30HN3MrDxXOn5N__xm_bwDBOPcw0qpNn60o9ORH_g" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
             </div>
+
+            <?= var_dump($Movies); ?>
 
           </div>
 

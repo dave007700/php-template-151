@@ -17,7 +17,7 @@ class Factory
 
 	public function getIndexController()
 	{
-		return new Controller\IndexController($this->getTemplateEngine());
+		return new Controller\IndexController($this->getTemplateEngine(), $this->getIndexService());
 	}
 
 	public function getLoginController()
@@ -50,5 +50,10 @@ class Factory
 	public function getRegisterService()
 	{
 		return new Service\Register\RegisterPDOService($this->getPdo());
+	}
+
+	public function getIndexService()
+	{
+		return new Service\Index\IndexPDOService($this->getPdo());
 	}
 }

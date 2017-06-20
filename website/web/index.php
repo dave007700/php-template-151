@@ -2,7 +2,7 @@
 
 error_reporting(E_ALL);
 
-session_start();	
+session_start();
 
 require_once("../vendor/autoload.php");
 
@@ -14,11 +14,11 @@ switch($_SERVER["REQUEST_URI"]) {
 	case "/testroute":
 		echo "Test blabla";
 	break;
-	
+
 	case "/":
 		$factory->getIndexController()->homepage();
 		break;
-		
+
 	case"/login":
 		$ctr = $factory->getLoginController();
 		if($_SERVER["REQUEST_METHOD"] == "GET")
@@ -30,7 +30,7 @@ switch($_SERVER["REQUEST_URI"]) {
 			$ctr->login($_POST);
 		}
 		break;
-	
+
 	case"/register":
 		$ctr = $factory->getRegisterController();
 		if($_SERVER["REQUEST_METHOD"] == "GET")
@@ -42,7 +42,7 @@ switch($_SERVER["REQUEST_URI"]) {
 			$ctr->register($_POST);
 		}
 		break;
-		
+
 	default:
 		$matches = [];
 		if(preg_match("|^/hello/(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
@@ -51,4 +51,3 @@ switch($_SERVER["REQUEST_URI"]) {
 		}
 		echo "Not Found";
 }
-
