@@ -40,7 +40,17 @@ switch($_SERVER["REQUEST_URI"]) {
 
 	case "/New-Entry":
 		{
-			$factory->getIndexController()->showcreateNewEntry();
+			$ctr = $factory->getIndexController();
+
+			if($_SERVER["REQUEST_METHOD"] == "GET")
+			{
+				$ctr->showcreateNewEntry();
+			}
+			else
+			{
+				$ctr->createNewEntry($_POST);
+			}
+
 			break;
 		}
 

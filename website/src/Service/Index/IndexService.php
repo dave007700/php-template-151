@@ -14,6 +14,7 @@
 		public  function GetRights();
 
 		public  function tryActivate($securityKey);
+		public  function createNewEntry($Name, $Content, $ReleaseDate, $TrailerURL, $BackGroundImgURL, $Tags, $PG);
 	}
 
 ?>

@@ -30,6 +30,11 @@ class IndexController
     echo $this->template->render("error404.html.php", ["taskbar" => $this->indexService->getTaskBar()]);
   }
 
+  public function uploadImageReturnName($MovieName)
+  {
+        return "default.jpg";
+  }
+
   public function showcreateNewEntry(){
     if($this->indexService->GetRights() > 1)
     {
@@ -42,6 +47,39 @@ class IndexController
     {
       $this->getError404();
     }
+  }
+
+  public function createNewEntry(array $data)
+  {
+    if($this->indexService->GetRights() > 1)
+    {
+      if(!array_key_exists("Entry_Name", $data) OR !array_key_exists("Entry_Date", $data))
+    	{
+    		$this->showcreateNewEntry();
+    		return;
+    	}
+
+      $this->indexService->createNewEntry(
+        $data["Entry_Name"],
+        $data["Entry_Content"],
+        $data["Entry_Date"],
+        $data["Entry_Trailer"],
+        $this->uploadImageReturnName($data["Entry_Name"]),
+        $data["Entry_Tags"],
+        $data["Entry_PG"]
+      );
+
+      $this->homepage();
+
+    }
+    else
+    {
+      $this->getError404();
+    }
+
+
+
+
   }
 
   public function greet($name) {

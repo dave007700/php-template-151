@@ -101,6 +101,24 @@
 
 		}
 
+		public function createNewEntry($Name, $Content, $ReleaseDate, $TrailerURL, $BackGroundImgURL, $Tags, $PG)
+		{
+			$stmt = $this->pdo->prepare(
+				"INSERT INTO `movie` (`Name`, `Content`, `ReleaseDate`, `TrailerURL`, `BackGroundImgURL`, `Tags`, `PG`, `FK_Category`)
+				VALUES (?, ?, ?, ?, ?, ?, ?, 0);"
+			);
+			$stmt->bindValue(1, $Name);
+			$stmt->bindValue(2, $Content);
+			$stmt->bindValue(3, $ReleaseDate);
+			$stmt->bindValue(4, $TrailerURL);
+			$stmt->bindValue(5, $BackGroundImgURL);
+			$stmt->bindValue(6, $Tags);
+			$stmt->bindValue(7, $PG);
+
+			$stmt->execute();
+
+		}
+
 		public function getTaskBar()
 		{
 

@@ -34,14 +34,14 @@
 
           <div class="thumbnail">
 
-              <form class="" action="/New-Entry" method="POST">
+              <form class="" action="/New-Entry" method="POST" enctype="multipart/form-data">
 
                 <h1>Neuen Eintrag erstellen</b></h1>
 
                 <br>
 
-                <b><label for="pictures[]">Filmposter: </label></b>
-                <input type="file" name="Entry_pictures[]" />
+                <b><label for="Entry_picture">Filmposter: </label></b>
+                <input type="file" name="Entry_picture" />
 
                 <br>
                 <br>
