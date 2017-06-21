@@ -27,8 +27,17 @@ class Factory
 
 	public function getRegisterController()
 	{
-		return new Controller\RegisterController($this->getTemplateEngine(), $this->getRegisterService());
+		return new Controller\RegisterController($this->getTemplateEngine(), $this->getRegisterService(), $this->getMailer());
 	}
+
+	public function getMailer()
+    {
+        return \Swift_Mailer::newInstance(
+                \Swift_SmtpTransport::newInstance($this->config['mailer']['host'], $this->config['mailer']['port'], $this->config['mailer']['security'])
+                ->setUsername($this->config['mailer']['user'])
+                ->setPassword($this->config['mailer']['password'])
+                );
+    }
 
 	public function getPdo()
 	{

@@ -66,6 +66,10 @@ switch($_SERVER["REQUEST_URI"]) {
 			$factory->getIndexController()->movieData($matches[1]);
 			break;
 		}
+		else if(preg_match("|^/activate=(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
+			$factory->getIndexController()->ActivateUser($matches[1]);
+			break;
+		}
 
 		$factory->getIndexController()->getError404();
 		//echo "Not Found";

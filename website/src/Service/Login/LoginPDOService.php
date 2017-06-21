@@ -18,7 +18,7 @@
 
 		public function authenticate($username, $password)
 		{
-			$stmt = $this->pdo->prepare("SELECT * FROM user WHERE email=? OR Username=? AND password=?");
+			$stmt = $this->pdo->prepare("SELECT * FROM user WHERE email=? OR Username=? AND password=? AND IsActivated=1");
 			$stmt->bindValue(1, $username);
 			$stmt->bindValue(2, $username);
 			$stmt->bindValue(3, $password);

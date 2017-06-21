@@ -75,6 +75,32 @@
 			}
 		}
 
+
+		private function changeActivateStatus($userID)
+		{
+			$stmt = $this->pdo->prepare("UPDATE user SET IsActivated = 1 WHERE ID = ?");
+			$stmt->bindValue(1, $userID);
+			return $stmt->execute();
+		}
+
+		public function tryActivate($securityKey)
+		{
+			$stmt = $this->pdo->prepare("SELECT ID FROM user WHERE securitykey = ? AND IsActivated = 0");
+			$stmt->bindValue(1, $securityKey);
+			$stmt->execute();
+
+			if($stmt->rowCount() === 1)
+			{
+				$variable = $stmt->fetch();
+				return $this->changeActivateStatus($variable['ID']);
+			}
+			else
+			{
+				return false;
+			}
+
+		}
+
 		public function getTaskBar()
 		{
 

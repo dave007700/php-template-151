@@ -12,6 +12,8 @@
 		public  function CheckLogin();
 		public  function GetUsername();
 		public  function GetRights();
+
+		public  function tryActivate($securityKey);
 	}
 
 ?>

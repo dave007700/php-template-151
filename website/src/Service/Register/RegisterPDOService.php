@@ -11,9 +11,26 @@
 			$this->pdo = $pdo;
 		}
 
-		private function available($username)
+		private function available_Mail($email)
 		{
 			$stmt = $this->pdo->prepare("SELECT * FROM user WHERE EMail=?");
+			$stmt->bindValue(1, $email);
+			$stmt->execute();
+
+			if($stmt->rowCount() === 1)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+
+		}
+
+		private function available_Username($username)
+		{
+			$stmt = $this->pdo->prepare("SELECT * FROM user WHERE Username=?");
 			$stmt->bindValue(1, $username);
 			$stmt->execute();
 
@@ -28,22 +45,32 @@
 
 		}
 
-		public function registerUser($username, $password)
+		public function registerUser($username, $email, $password, $securityKey)
 		{
-			if(filter_var($username, FILTER_VALIDATE_EMAIL))
+			if(filter_var($email, FILTER_VALIDATE_EMAIL))
 			{
-				if($this->available($username))
+				if($this->available_Mail($email))
 				{
-					//TODO: Hash the Password
-					try {
-						$stmt = $this->pdo->prepare("INSERT INTO user (email, password) VALUES (?,?)");
-						$stmt->bindValue(1, $username);
-						$stmt->bindValue(2, $password);
-						$stmt->execute();
+					if($this->available_Username($username))
+					{
+						//TODO: Hash the Password
+						try {
+							$stmt = $this->pdo->prepare("INSERT INTO user (username, email, password, securitykey) VALUES (?,?,?,?)");
+							$stmt->bindValue(1, $username);
+							$stmt->bindValue(2, $email);
+							$stmt->bindValue(3, $password);
+							$stmt->bindValue(4, $securityKey);
+							$stmt->execute();
 
-						return true;
-					} catch(\Exception $e) {
-						var_dump($e);
+							return true;
+						} catch(\Exception $e) {
+							var_dump($e);
+						}
+					}
+					else
+					{
+						echo "Dieser Benutzername ist berreits Registriert";
+						return false;
 					}
 				}
 				else

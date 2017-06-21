@@ -67,4 +67,17 @@ class IndexController
     }
 
   }
+
+  public function ActivateUser($securityKey)
+  {
+    if($this->indexService->tryActivate($securityKey))
+    {
+      echo $this->template->render("activate.html.php", ["taskbar" => $this->indexService->getTaskBar()]);
+    }
+    else
+    {
+      $this->getError404();
+    }
+  }
+
 }
