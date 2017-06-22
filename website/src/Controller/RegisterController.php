@@ -41,6 +41,11 @@ class RegisterController
                 $this->mailer->send($message);
   }
 
+  private function generateKey($email)
+  {
+    return sha1(mt_rand(10000,99999).time().$email);
+  }
+
   public function register(array $data)
   {
   	if(!array_key_exists("username", $data) OR !array_key_exists("email", $data) OR !array_key_exists("password", $data))
@@ -49,7 +54,7 @@ class RegisterController
   		return;
   	}
 
-    $securityKey = sha1(mt_rand(10000,99999).time().$data["email"]);
+    $securityKey = $this->generateKey($data['email']);
 
   	if($this->registerService->registerUser($data["username"], $data["email"], $data["password"], $securityKey))
   	{

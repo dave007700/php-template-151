@@ -78,7 +78,7 @@
 
 		private function changeActivateStatus($userID)
 		{
-			$stmt = $this->pdo->prepare("UPDATE user SET IsActivated = 1 WHERE ID = ?");
+			$stmt = $this->pdo->prepare("UPDATE user SET IsActivated = 2 WHERE ID = ?");
 			$stmt->bindValue(1, $userID);
 			return $stmt->execute();
 		}
