@@ -80,6 +80,22 @@ switch($_SERVER["REQUEST_URI"]) {
 			$factory->getIndexController()->ActivateUser($matches[1]);
 			break;
 		}
+		else if(preg_match("|^/Edit-Movie=(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
+
+			$ctr = $factory->getIndexController();
+
+			if($_SERVER["REQUEST_METHOD"] == "GET")
+			{
+				$ctr->showeditEntry($matches[1]);
+			}
+			else
+			{
+				//$ctr->createNewEntry($_POST);
+			}
+
+			break;
+		}
+
 
 		$factory->getIndexController()->getError404();
 		//echo "Not Found";

@@ -77,8 +77,33 @@ class IndexController
       $this->getError404();
     }
 
+  }
 
+  public function showeditEntry($movieID)
+  {
+    if($this->indexService->GetRights() > 1)
+    {
+      $MovieData = $this->indexService->getMoveByID($movieID);
 
+      if($MovieData !== null)
+      {
+        echo $this->template->render("editEntry.html.php", [
+          "taskbar" => $this->indexService->getTaskBar(),
+          "UserRights" => $this->indexService->GetRights(),
+          "MovieData" => $MovieData
+        ]);
+        return;
+      }
+      else
+      {
+        $this->getError404();
+      }
+
+    }
+    else
+    {
+      $this->getError404();
+    }
 
   }
 
