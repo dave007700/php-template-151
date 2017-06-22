@@ -71,7 +71,7 @@
 								//echo var_dump($value);
 								echo '<a href="/movie='. $key["ID"] . '">';
 									echo '<div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">';
-			              echo '<img src="MoviePoster/'. $MoviePoster . '" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">';
+			              echo '<img src="MoviePoster/'. $key["ImageURL"] . '" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">';
 			              echo '<h4>'. $key["Name"] . '</h4>';
 			              echo '<span class="text-muted">Release: ' . date("d.m.Y", strtotime($key["ReleaseDate"])) . '</span>';
 			            echo '</div>';

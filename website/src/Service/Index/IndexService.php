@@ -14,10 +14,10 @@
 		public  function GetRights();
 
 		public  function tryActivate($securityKey);
-		public  function createNewEntry($Name, $Content, $ReleaseDate, $TrailerURL, $BackGroundImgURL, $Tags, $PG);
+		public  function createNewEntry($Name, $Content, $ReleaseDate, $TrailerURL, $Tags, $PG);
 
-		public  function uploadImageReturnName($id);
-		public  function getPictureByID($id);
+		public  function uploadImageReturnStatus($id);
+		//public  function getPictureByID($id);
 	}
 
 ?>

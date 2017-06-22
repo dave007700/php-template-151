@@ -1,5 +1,7 @@
 <?php
 
+namespace dave007700\Entity;
+
 class Movie
 {
   private $ID;
@@ -13,7 +15,7 @@ class Movie
   private $PG;
   private $FK_Category;
 
-  public function __construct()
+  public function __construct($ID, $Name, $Content, $RealesDate, $TrailerURL, $HasImage, $MoviePoster, $Tags, $PG)
   {
     $this->$ID = $ID;
     $this->$Name = $Name;
@@ -26,47 +28,47 @@ class Movie
     $this->$PG = $PG;
   }
 
-  public function getID($ID)
+  public function getID()
   {
     return $ID;
   }
 
-  public function getName($Name)
+  public function getName()
   {
     return $Name;
   }
 
-  public function getContent($Content)
+  public function getContent()
   {
     return $Content;
   }
 
-  public function getRealesDate($RealesDate)
+  public function getRealesDate()
   {
     return $RealesDate;
   }
 
-  public function getTrailerURL($TrailerURL)
+  public function getTrailerURL()
   {
     return $TrailerURL;
   }
 
-  public function getHasImage($HasImage)
+  public function getHasImage()
   {
     return $HasImage;
   }
 
-  public function getMoviePoster($MoviePoster)
+  public function getMoviePoster()
   {
     return $MoviePoster;
   }
 
-  public function getTags($Tags)
+  public function getTags()
   {
     return $Tags;
   }
 
-  public function getPG($PG)
+  public function getPG()
   {
     return $PG;
   }

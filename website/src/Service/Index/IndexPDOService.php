@@ -2,6 +2,8 @@
 
 	namespace dave007700\Service\Index;
 
+	use dave007700\Entity;
+
 	class IndexPDOService implements IndexService
 	{
 		/**
@@ -57,6 +59,28 @@
 			$stmt->execute();
 
 			return $stmt->fetchAll();
+
+			/*$movies = [];
+	    while($row = $stmt->fetchObject()) {
+	        $movie = new \Movie
+					(
+						$row->ID,
+						$row->Name,
+						$row->Content,
+						$row->RealesDate,
+						$row->TrailerURL,
+						$row->HasImage,
+						$this->getPictureByID($row->ID),
+						$row->MoviePoster,
+						$row->Tags,
+						$row->PG
+					);
+
+					$movies[] .= $movie;
+	    }
+
+			return $movies;*/
+
 		}
 
 		public function getMoveByID($MovieID)
@@ -101,7 +125,7 @@
 
 		}
 
-		public function createNewEntry($Name, $Content, $ReleaseDate, $TrailerURL, $BackGroundImgURL, $Tags, $PG)
+		public function createNewEntry($Name, $Content, $ReleaseDate, $TrailerURL, $Tags, $PG)
 		{
 			$stmt = $this->pdo->prepare(
 				"INSERT INTO `movie` (`Name`, `Content`, `ReleaseDate`, `TrailerURL`, `Tags`, `PG`, `FK_Category`)
@@ -118,11 +142,14 @@
 
 			$lastID = $this->pdo->lastInsertId();
 
-			if($this->uploadImageReturnName($lastID))
+			if($this->uploadImageReturnStatus($lastID))
 			{
 				$stmt = $this->pdo->prepare(
-					"UPDATE movie SET HasImage = 1 WHERE ID = ?");
-					$stmt->bindValue(1, $lastID);
+					"UPDATE movie SET ImageURL = ? WHERE ID = ?");
+
+					$stmt->bindValue(1, $lastID.".jpg");
+					$stmt->bindValue(2, $lastID);
+
 					$stmt->execute();
 
 			}
@@ -188,38 +215,19 @@
 			return $returnValue;
 		}
 
-		public function uploadImageReturnName($id)
+		public function uploadImageReturnStatus($id)
 	  {
 			if($_FILES["Entry_picture"]["error"] == \UPLOAD_ERR_NO_FILE) {
 				return 0;
 			}
 			else
-			{
-				move_uploaded_file($_FILES["tmp_name"], __DIR__ . "/../../web/MoviePoster/" . $id . ".jpg");
+			{ #/../../web/MoviePoster/
+				die("Die Feature with Picture not added yet");
+				die(var_dump(__DIR__ . "/../../web/MoviePoster/"));
+				move_uploaded_file($_FILES["Entry_picture"]["tmp_name"], __DIR__ . "/../../web/MoviePoster/" . $id . ".jpg");
 				return 1;
 			}
 	  }
-
-		public function getPictureByID($id)
-		{
-
-			$stmt = $this->pdo->prepare(
-				"SELECT HasImage FROM movie WHERE ID = ?;"
-			);
-			$stmt->bindValue(1, $ID);
-			$stmt->execute();
-
-			$value = $stmt->fetch();
-
-			if($value['ID'])
-			{
-				return $id . ".jpg";
-			}
-			else
-			{
-				return "default.jpg";
-			}
-		}
 
 	}
 

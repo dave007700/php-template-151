@@ -25,15 +25,8 @@ class IndexController
   public function homepage() {
     echo $this->template->render("homepage.html.php", [
       "taskbar" => $this->indexService->getTaskBar(),
-      "Movies" => $this->indexService->getAllMovies(),
+      "Movies" => $this->indexService->getAllMovies()
     ]);
-
-    $products = []; //TODO <--- <---
-    while($row = $stmt->fetchObject()) {
-        $product = new Product();
-        $product->setId($row->id);
-        $products[] = $product;
-    }
 
   }
 
@@ -71,7 +64,7 @@ class IndexController
         $data["Entry_Content"],
         $data["Entry_Date"],
         $data["Entry_Trailer"],
-        $this->indexService->uploadImageReturnName($data["Entry_Name"]),
+        $this->indexService->uploadImageReturnStatus($data["Entry_Name"]),
         $data["Entry_Tags"],
         $data["Entry_PG"]
       );
