@@ -15,6 +15,9 @@
 
 		public  function tryActivate($securityKey);
 		public  function createNewEntry($Name, $Content, $ReleaseDate, $TrailerURL, $BackGroundImgURL, $Tags, $PG);
+
+		public  function uploadImageReturnName($id);
+		public  function getPictureByID($id);
 	}
 
 ?>

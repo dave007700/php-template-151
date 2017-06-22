@@ -23,17 +23,24 @@ class IndexController
   }
 
   public function homepage() {
-    echo $this->template->render("homepage.html.php", ["taskbar" => $this->indexService->getTaskBar(), "Movies" => $this->indexService->getAllMovies()]);
+    echo $this->template->render("homepage.html.php", [
+      "taskbar" => $this->indexService->getTaskBar(),
+      "Movies" => $this->indexService->getAllMovies(),
+    ]);
+
+    $products = []; //TODO <--- <---
+    while($row = $stmt->fetchObject()) {
+        $product = new Product();
+        $product->setId($row->id);
+        $products[] = $product;
+    }
+
   }
 
   public function getError404(){
     echo $this->template->render("error404.html.php", ["taskbar" => $this->indexService->getTaskBar()]);
   }
 
-  public function uploadImageReturnName($MovieName)
-  {
-        return "default.jpg";
-  }
 
   public function showcreateNewEntry(){
     if($this->indexService->GetRights() > 1)
@@ -64,7 +71,7 @@ class IndexController
         $data["Entry_Content"],
         $data["Entry_Date"],
         $data["Entry_Trailer"],
-        $this->uploadImageReturnName($data["Entry_Name"]),
+        $this->indexService->uploadImageReturnName($data["Entry_Name"]),
         $data["Entry_Tags"],
         $data["Entry_PG"]
       );

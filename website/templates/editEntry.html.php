@@ -34,9 +34,9 @@
 
           <div class="thumbnail">
 
-              <form class="" action="/New-Entry" method="POST" enctype="multipart/form-data">
+              <form class="" action="/Update-Entry" method="POST" enctype="multipart/form-data">
 
-                <h1>Neuen Eintrag erstellen</b></h1>
+                <h1>Eintrag bearbeiten</b></h1>
 
                 <br>
                 <div class="col-xs-6 col-sm-2 placeholder">
@@ -63,14 +63,14 @@
                 <br>
 
                 <b><label>Erscheinungs Datum: </label></b>
-                <input type="date" name="Entry_Date" value="<?= htmlspecialchars(date("d.m.Y", strtotime($MovieData["ReleaseDate"])))?>" required="true">
+                <input type="date" name="Entry_Date" value="<?= htmlspecialchars($MovieData["ReleaseDate"])?>" required="true">
 
                 <br>
                 <br>
 
                 <b><label>Trailer URL: </label></b>
-                https://www.youtube.com/watch?v=<?= htmlspecialchars($MovieData['TrailerURL'])?>
-                <input type="text" name="Entry_Trailer" value="">
+                https://www.youtube.com/watch?v=
+                <input type="text" name="Entry_Trailer" value="<?= htmlspecialchars($MovieData['TrailerURL'])?>">
 
                 <br>
                 <br>

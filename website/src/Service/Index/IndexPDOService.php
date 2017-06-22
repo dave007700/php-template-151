@@ -104,18 +104,29 @@
 		public function createNewEntry($Name, $Content, $ReleaseDate, $TrailerURL, $BackGroundImgURL, $Tags, $PG)
 		{
 			$stmt = $this->pdo->prepare(
-				"INSERT INTO `movie` (`Name`, `Content`, `ReleaseDate`, `TrailerURL`, `BackGroundImgURL`, `Tags`, `PG`, `FK_Category`)
-				VALUES (?, ?, ?, ?, ?, ?, ?, 0);"
+				"INSERT INTO `movie` (`Name`, `Content`, `ReleaseDate`, `TrailerURL`, `Tags`, `PG`, `FK_Category`)
+				VALUES (?, ?, ?, ?, ?, ?, 0);"
 			);
 			$stmt->bindValue(1, $Name);
 			$stmt->bindValue(2, $Content);
 			$stmt->bindValue(3, $ReleaseDate);
 			$stmt->bindValue(4, $TrailerURL);
-			$stmt->bindValue(5, $BackGroundImgURL);
-			$stmt->bindValue(6, $Tags);
-			$stmt->bindValue(7, $PG);
+			$stmt->bindValue(5, $Tags);
+			$stmt->bindValue(6, $PG);
 
 			$stmt->execute();
+
+			$lastID = $this->pdo->lastInsertId();
+
+			if($this->uploadImageReturnName($lastID))
+			{
+				$stmt = $this->pdo->prepare(
+					"UPDATE movie SET HasImage = 1 WHERE ID = ?");
+					$stmt->bindValue(1, $lastID);
+					$stmt->execute();
+
+			}
+
 
 		}
 
@@ -176,6 +187,40 @@
 
 			return $returnValue;
 		}
+
+		public function uploadImageReturnName($id)
+	  {
+			if($_FILES["Entry_picture"]["error"] == \UPLOAD_ERR_NO_FILE) {
+				return 0;
+			}
+			else
+			{
+				move_uploaded_file($_FILES["tmp_name"], __DIR__ . "/../../web/MoviePoster/" . $id . ".jpg");
+				return 1;
+			}
+	  }
+
+		public function getPictureByID($id)
+		{
+
+			$stmt = $this->pdo->prepare(
+				"SELECT HasImage FROM movie WHERE ID = ?;"
+			);
+			$stmt->bindValue(1, $ID);
+			$stmt->execute();
+
+			$value = $stmt->fetch();
+
+			if($value['ID'])
+			{
+				return $id . ".jpg";
+			}
+			else
+			{
+				return "default.jpg";
+			}
+		}
+
 	}
 
 ?>
