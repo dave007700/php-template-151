@@ -34,6 +34,7 @@
 				$_SESSION["email"] = $returnSQL['EMail'];
 				$_SESSION["Username"] = $returnSQL['Username'];
 				$_SESSION["UserRights"] = $returnSQL['FK_Rights'];
+				$_SESSION['UserID'] = $returnSQL['ID'];
 				$_SESSION["LogedIN"] = true;
 
 				return true;

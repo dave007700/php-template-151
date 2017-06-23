@@ -5,6 +5,7 @@
 		<link rel="stylesheet" href="CSS/index.css">
     <link rel="stylesheet" href="CSS/MovieData.css">
     <link rel="stylesheet" href="CSS/movieCover.css">
+		<link rel="stylesheet" href="CSS/commentar.css">
 
 		<!-- Import Ajax From Google Servers -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -81,30 +82,61 @@
 
 							<div class="form-group">
 						    <label for="commentWriteTitel">Dein Titel</label>
-						    <input type="email" class="form-control" name="commentWriteTitel" id="commentWriteTitel" placeholder="Dein Titel">
+						    <input type="text" class="form-control" name="commentWriteTitel" id="commentWriteTitel" placeholder="Dein Titel">
 
 								<label for="commentWriteTitel">Dein Kommentar</label>
-								<textarea class="form-control" name="commentWriteTitel" id="commentWriteTitel" rows="4" cols="80" placeholder="Dein Kommentar"></textarea>
+								<textarea class="form-control" name="commentWriteContent" id="commentWriteContent" rows="4" cols="80" placeholder="Dein Kommentar"></textarea>
 
 								<br>
 
 								<input type="submit" class="btn btn-success" name="PostMyComment" value="Kommentar Posten">
-								
+
 						  </div>
 
 			      </form>
           </div>
 
+					<div class="row">
 					<?php
 
 					foreach ($Comments as $key)
 					{
-						echo '<div class="thumbnail">';
+						echo '
+						  <div class="col-sm-6 col-md-4">
+						    <div class="thumbnail">
+						      <div class="caption">
 
-	          echo '</div>';
+						        <b>'.htmlspecialchars($key['Username']).' &lt'.htmlspecialchars($key['EMail']).'&gt </b>
+
+										<div class="comment-ImDate">
+
+											<b>'.htmlspecialchars($key['Date']).'</b>
+
+											';
+
+											if($MyUserID === $key['FK_UserID'])
+											{
+												echo ' <span class="glyphicon glyphicon-remove-sign"></span>';
+											}
+
+											echo '
+
+										</div>
+
+										<br>
+										<br>
+										<h4>'.htmlspecialchars($key['Titel']).'</h4>
+										<br>
+										<p>'.htmlspecialchars($key['Content']).'</p>
+
+						      </div>
+						    </div>
+							</div>';
+
 					}
 
 					?>
+					</div>
 
         </div>
       </div>

@@ -123,7 +123,8 @@ class IndexController
         "MovieData" => $MovieData,
         "Comments" => $Comments,
         "Username" => $this->indexService->GetUsername(),
-        "UserRights" => $this->indexService->GetRights()
+        "UserRights" => $this->indexService->GetRights(),
+        "MyUserID" => $this->indexService->GetUserID()
       ]);
     }
     else
@@ -131,6 +132,41 @@ class IndexController
       header('Location: /Error-404');
     }
 
+  }
+
+  public function createComment($movieID, array $data)
+  {
+    if($this->indexService->GetRights() > 0)
+    {
+      if($this->indexService->existsMovieByID($movieID))
+      {
+        if(!array_key_exists("commentWriteTitel", $data) OR !array_key_exists("commentWriteContent", $data))
+      	{
+      		$this->showMovieData($movieID);
+      		return;
+      	}
+
+        if($data["commentWriteTitel"] != "" && $data["commentWriteContent"] != "")
+        {
+          $this->indexService->createComment($movieID, $data["commentWriteTitel"], $data["commentWriteContent"]);
+          header('Location: /movie='. $movieID);
+        }
+        else
+        {
+          $this->showMovieData($movieID);
+        }
+      }
+      else
+      {
+        $this->getError404();
+        return;
+      }
+    }
+    else
+    {
+      $this->showMovieData($movieID);
+      return;
+    }
   }
 
   public function ActivateUser($securityKey)

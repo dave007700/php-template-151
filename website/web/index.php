@@ -73,7 +73,18 @@ switch($_SERVER["REQUEST_URI"]) {
 			break;
 		}
 		else if(preg_match("|^/movie=(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
-			$factory->getIndexController()->showMovieData($matches[1]);
+
+			$ctr = $factory->getIndexController();
+
+			if($_SERVER["REQUEST_METHOD"] == "GET")
+			{
+				$ctr->showMovieData($matches[1]);
+			}
+			else
+			{
+				$ctr->createComment($matches[1], $_POST);
+			}
+
 			break;
 		}
 		else if(preg_match("|^/activate=(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {

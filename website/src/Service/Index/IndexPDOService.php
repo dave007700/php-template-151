@@ -51,6 +51,15 @@
 
 			return $_SESSION['UserRights'];
 		}
+
+		public function GetUserID()
+		{
+			if(!(isset($_SESSION['UserID'])))
+			{
+				$_SESSION['UserID'] = 0;
+			}
+			return $_SESSION['UserID'];
+		}
 		#endregion
 
 		public function getAllMovies()
@@ -101,11 +110,47 @@
 
 		public function getCommentsFromMovie($movieID)
 		{
-			$stmt = $this->pdo->prepare("SELECT c.* FROM comments c INNER JOIN movie m ON c.MovieID = m.ID WHERE c.MovieID = ?");
+			$stmt = $this->pdo->prepare("SELECT c.*, u.Username as Username, u.EMail as EMail FROM comments c INNER JOIN movie m ON c.MovieID = m.ID INNER JOIN user u ON c.FK_UserID = u.ID WHERE c.MovieID = ? ORDER BY c.ID DESC");
 			$stmt->bindValue(1, $movieID);
 			$stmt->execute();
 
 			return $stmt->fetchAll();
+		}
+
+		function createComment($movieID, $titel, $message)
+		{
+			$userID = $this->GetUserID();
+
+			if($userID != 0)
+			{
+				$stmt = $this->pdo->prepare(
+					"INSERT INTO `comments` (`MovieID`, `FK_UserID`, `Titel`, `Content`, `Date`)
+					VALUES (?, ?, ?, ?, now());"
+				);
+				$stmt->bindValue(1, $movieID);
+				$stmt->bindValue(2, $userID);
+				$stmt->bindValue(3, $titel);
+				$stmt->bindValue(4, $message);
+				$stmt->execute();
+			}
+
+		}
+
+		public function existsMovieByID($movieID)
+		{
+			$stmt = $this->pdo->prepare("SELECT ID FROM movie WHERE ID = ?");
+			$stmt->bindValue(1, $movieID);
+			$stmt->execute();
+
+			if($stmt->rowCount() === 1)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
 		}
 
 
