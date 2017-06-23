@@ -111,15 +111,17 @@ class IndexController
   	echo $this->template->render("hello.html.php", ["name" => $name]);
   }
 
-  public function movieData($MovieID)
+  public function showMovieData($MovieID)
   {
     $MovieData = $this->indexService->getMoveByID($MovieID);
+    $Comments = $this->indexService->getCommentsFromMovie($MovieID);
 
     if($MovieData !== null)
     {
       echo $this->template->render("movie.html.php", [
         "taskbar" => $this->indexService->getTaskBar(),
         "MovieData" => $MovieData,
+        "Comments" => $Comments,
         "Username" => $this->indexService->GetUsername(),
         "UserRights" => $this->indexService->GetRights()
       ]);

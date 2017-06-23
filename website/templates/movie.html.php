@@ -74,11 +74,37 @@
 
           </div>
 
-          <h2 class="sub-header">Kommentare <span class="label label-success label-as-badge">14</span></h2>
+          <h2 class="sub-header">Kommentare <span class="label label-success label-as-badge"><?= $MovieData['CommentCount'] ?></span></h2>
 
           <div class="thumbnail">
+						<form class="form-signin" action="/movie=<?= $MovieData['ID'] ?>" method="POST">
 
+							<div class="form-group">
+						    <label for="commentWriteTitel">Dein Titel</label>
+						    <input type="email" class="form-control" name="commentWriteTitel" id="commentWriteTitel" placeholder="Dein Titel">
+
+								<label for="commentWriteTitel">Dein Kommentar</label>
+								<textarea class="form-control" name="commentWriteTitel" id="commentWriteTitel" rows="4" cols="80" placeholder="Dein Kommentar"></textarea>
+
+								<br>
+
+								<input type="submit" class="btn btn-success" name="PostMyComment" value="Kommentar Posten">
+								
+						  </div>
+
+			      </form>
           </div>
+
+					<?php
+
+					foreach ($Comments as $key)
+					{
+						echo '<div class="thumbnail">';
+
+	          echo '</div>';
+					}
+
+					?>
 
         </div>
       </div>

@@ -7,6 +7,8 @@
 		public  function getAllMovies();
 		public  function getMoveByID($MovieID);
 
+		public  function getCommentsFromMovie($movieID);
+
 		public  function getTaskBar();
 
 		public  function CheckLogin();

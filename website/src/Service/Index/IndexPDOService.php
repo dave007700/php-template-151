@@ -85,7 +85,7 @@
 
 		public function getMoveByID($MovieID)
 		{
-			$stmt = $this->pdo->prepare("SELECT * FROM movie WHERE ID = ?");
+			$stmt = $this->pdo->prepare("SELECT m.*, Count(c.ID) as CommentCount FROM movie m INNER JOIN comments c ON c.MovieID = m.ID WHERE m.ID = ?");
 			$stmt->bindValue(1, $MovieID);
 			$stmt->execute();
 
@@ -97,6 +97,15 @@
 			{
 				return null;
 			}
+		}
+
+		public function getCommentsFromMovie($movieID)
+		{
+			$stmt = $this->pdo->prepare("SELECT c.* FROM comments c INNER JOIN movie m ON c.MovieID = m.ID WHERE c.MovieID = ?");
+			$stmt->bindValue(1, $movieID);
+			$stmt->execute();
+
+			return $stmt->fetchAll();
 		}
 
 
