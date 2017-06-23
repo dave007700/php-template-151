@@ -55,10 +55,11 @@
 					{
 						//TODO: Hash the Password
 						try {
+
 							$stmt = $this->pdo->prepare("INSERT INTO user (username, email, password, securitykey) VALUES (?,?,?,?)");
 							$stmt->bindValue(1, $username);
 							$stmt->bindValue(2, $email);
-							$stmt->bindValue(3, $password);
+							$stmt->bindValue(3, password_hash($password, PASSWORD_DEFAULT));
 							$stmt->bindValue(4, $securityKey);
 							$stmt->execute();
 

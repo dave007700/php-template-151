@@ -21,12 +21,10 @@ CREATE TABLE `comments` (
   `Titel` varchar(128) NOT NULL,
   `Content` varchar(512) NOT NULL,
   `Date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `IsDisplayed` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `comments` (`ID`, `MovieID`, `FK_UserID`, `Titel`, `Content`, `Date`) VALUES
-(1,	1,	2,	'Cool',	'Mega Cooool',	'2017-06-23 17:50:09'),
-(2,	1,	2,	'Nice',	'I really really like this shit',	'2017-06-23 18:30:30');
 
 DROP TABLE IF EXISTS `movie`;
 CREATE TABLE `movie` (
@@ -75,5 +73,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `user` (`ID`, `Username`, `Password`, `EMail`, `IsActivated`, `Securitykey`, `Resetkey`, `FK_Rights`) VALUES
+(8,	'dave',	'$2y$10$ZgJL73O0XwLPC7TphSTZ6.J3IF.s8D.AGmMmZRk55P/uslEh5/iF.',	'dave@swag.com',	2,	'1c5928957291dafc7386f1e43736f9aa8968b58e',	'',	2);
 
--- 2017-06-23 19:01:54
+-- 2017-06-23 21:00:59

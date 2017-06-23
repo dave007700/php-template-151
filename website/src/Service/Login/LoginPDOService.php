@@ -18,23 +18,22 @@
 
 		public function authenticate($username, $password)
 		{
-			$stmt = $this->pdo->prepare("SELECT * FROM user WHERE email=? OR Username=? AND password=? AND IsActivated=2");
+			$stmt = $this->pdo->prepare("SELECT * FROM user WHERE email=? OR Username=? AND IsActivated=2");
 			$stmt->bindValue(1, $username);
 			$stmt->bindValue(2, $username);
-			$stmt->bindValue(3, $password);
 			$stmt->execute();
 
-			if($stmt->rowCount() === 1)
+			$sqlReturnValues = $stmt->fetch();
+
+			if($stmt->rowCount() === 1 && password_verify($password, $sqlReturnValues['Password']))
 			{
 
 				session_reset();
 
-				$returnSQL = $stmt->fetch();
-
-				$_SESSION["email"] = $returnSQL['EMail'];
-				$_SESSION["Username"] = $returnSQL['Username'];
-				$_SESSION["UserRights"] = $returnSQL['FK_Rights'];
-				$_SESSION['UserID'] = $returnSQL['ID'];
+				$_SESSION["email"] = $sqlReturnValues['EMail'];
+				$_SESSION["Username"] = $sqlReturnValues['Username'];
+				$_SESSION["UserRights"] = $sqlReturnValues['FK_Rights'];
+				$_SESSION['UserID'] = $sqlReturnValues['ID'];
 				$_SESSION["LogedIN"] = true;
 
 				return true;

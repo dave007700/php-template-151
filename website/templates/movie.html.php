@@ -82,7 +82,7 @@
 
 							<div class="form-group">
 						    <label for="commentWriteTitel">Dein Titel</label>
-						    <input type="text" class="form-control" name="commentWriteTitel" id="commentWriteTitel" placeholder="Dein Titel">
+						    <input type="text" class="form-control" name="commentWriteTitel" id="commentWriteTitel" placeholder="Dein Titel" autocomplete="off">
 
 								<label for="commentWriteTitel">Dein Kommentar</label>
 								<textarea class="form-control" name="commentWriteContent" id="commentWriteContent" rows="4" cols="80" placeholder="Dein Kommentar"></textarea>
