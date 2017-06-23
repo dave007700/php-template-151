@@ -110,13 +110,13 @@
 
 										<div class="comment-ImDate">
 
-											<b>'.htmlspecialchars($key['Date']).'</b>
+											<b>'.htmlspecialchars(date("d.m.Y H:m:s", strtotime($key["Date"]))).'</b>
 
 											';
 
 											if($MyUserID === $key['FK_UserID'])
 											{
-												echo ' <span class="glyphicon glyphicon-remove-sign"></span>';
+												echo ' <a href="/DeleteComment='.$key['ID'].'"><span class="glyphicon glyphicon-remove-sign" role="button"></span></a>';
 											}
 
 											echo '

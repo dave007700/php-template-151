@@ -8,6 +8,7 @@
 		public  function getMoveByID($MovieID);
 		public  function existsMovieByID($movieID);
 
+		public  function checkIfUserComment($commentID, $userID);
 		public  function createComment($movieID, $titel, $message);
 		public  function getCommentsFromMovie($movieID);
 

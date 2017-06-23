@@ -94,7 +94,7 @@
 
 		public function getMoveByID($MovieID)
 		{
-			$stmt = $this->pdo->prepare("SELECT m.*, Count(c.ID) as CommentCount FROM movie m INNER JOIN comments c ON c.MovieID = m.ID WHERE m.ID = ?");
+			$stmt = $this->pdo->prepare("SELECT m.*, Count(c.ID) as CommentCount FROM movie m INNER JOIN comments c ON c.MovieID = m.ID WHERE m.ID = ? AND c.IsDisplayed = 1");
 			$stmt->bindValue(1, $MovieID);
 			$stmt->execute();
 
@@ -110,11 +110,28 @@
 
 		public function getCommentsFromMovie($movieID)
 		{
-			$stmt = $this->pdo->prepare("SELECT c.*, u.Username as Username, u.EMail as EMail FROM comments c INNER JOIN movie m ON c.MovieID = m.ID INNER JOIN user u ON c.FK_UserID = u.ID WHERE c.MovieID = ? ORDER BY c.ID DESC");
+			$stmt = $this->pdo->prepare("SELECT c.*, u.Username as Username, u.EMail as EMail FROM comments c INNER JOIN movie m ON c.MovieID = m.ID INNER JOIN user u ON c.FK_UserID = u.ID WHERE c.MovieID = ? AND c.IsDisplayed = 1 ORDER BY c.ID DESC");
 			$stmt->bindValue(1, $movieID);
 			$stmt->execute();
 
 			return $stmt->fetchAll();
+		}
+
+		function checkIfUserComment($commentID, $userID)
+		{
+			$stmt = $this->pdo->prepare("SELECT ID FROM comments WHERE ID = ? AND FK_UserID = ? AND IsDisplayed = 1");
+			$stmt->bindValue(1, $commentID);
+			$stmt->bindValue(2, $userID);
+			$stmt->execute();
+
+			if($stmt->rowCount() === 1)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		function createComment($movieID, $titel, $message)
@@ -134,6 +151,17 @@
 				$stmt->execute();
 			}
 
+		}
+
+		function deleteComment($commentID, $userID)
+		{
+			$stmt = $this->pdo->prepare
+			(
+				"UPDATE comments SET IsDisplayed = 0 WHERE ID = ? AND FK_UserID = ? AND IsDisplayed = 1"
+			);
+			$stmt->bindValue(1, $commentID);
+			$stmt->bindValue(2, $userID);
+			$stmt->execute();
 		}
 
 		public function existsMovieByID($movieID)

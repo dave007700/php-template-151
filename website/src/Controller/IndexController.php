@@ -169,6 +169,29 @@ class IndexController
     }
   }
 
+  public function deleteComment($commentID)
+  {
+
+    $userID = $this->indexService->GetUserID();
+
+    if($this->indexService->GetRights() > 0)
+    {
+      if($this->indexService->checkIfUserComment($commentID, $userID))
+      {
+        $this->indexService->deleteComment($commentID, $userID);
+        $this->homepage();
+      }
+      else
+      {
+        header('Location: /Error-404');
+      }
+    }
+    else
+    {
+      header('Location: /Error-404');
+    }
+  }
+
   public function ActivateUser($securityKey)
   {
     if($this->indexService->tryActivate($securityKey))

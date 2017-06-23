@@ -106,6 +106,12 @@ switch($_SERVER["REQUEST_URI"]) {
 
 			break;
 		}
+		else if(preg_match("|^/DeleteComment=(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
+
+			$factory->getIndexController()->deleteComment($matches[1]);
+
+			break;
+		}
 
 
 		$factory->getIndexController()->getError404();
