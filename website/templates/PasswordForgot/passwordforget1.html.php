@@ -24,7 +24,7 @@
 		<div class="container">
 
       <form class="form-signin" action="" method="POST">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">Please Username or E-Mail</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="text" name="email" id="inputEmail" class="form-control" placeholder="Email address or Username" required="true" autofocus="" value="<?= (isset($email)) ? htmlspecialchars($email) : "" ?>">
         <label for="inputPassword" class="sr-only">Password</label>

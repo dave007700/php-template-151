@@ -31,12 +31,22 @@ class RegisterController
   	echo $this->template->render("register.html.php");
   }
 
-  private function sendUserMail($username, $email, $securityKey)
+  private function sendUserMailRegister($username, $email, $securityKey)
   {
     $message = (new \Swift_Message('Registrierung'))
                 ->setFrom(['security@losdostacos.com' => 'noreply'])
                 ->setTo([$email])
                 ->setBody("Welcome " . $username . "!!! Open this link to activate your account: https://localhost/activate=" . $securityKey);
+
+                $this->mailer->send($message);
+  }
+
+  private function sendUserMailPassword($username, $email, $securityKey)
+  {
+    $message = (new \Swift_Message('Password Reset'))
+                ->setFrom(['security@losdostacos.com' => 'noreply'])
+                ->setTo([$email])
+                ->setBody("Good day " . $username . "!!! Open this link to set a new Password for your account: https://localhost/Password-Reset/verify=" . $securityKey);
 
                 $this->mailer->send($message);
   }
@@ -59,7 +69,7 @@ class RegisterController
   	if($this->registerService->registerUser($data["username"], $data["email"], $data["password"], $securityKey))
   	{
 
-      $this->sendUserMail($data["username"], $data["email"], $securityKey);
+      $this->sendUserMailRegister($data["username"], $data["email"], $securityKey);
 
   		header('Location: /login');
   	}
@@ -68,7 +78,16 @@ class RegisterController
   		echo $this->template->render("register.html.php", ["username" => $data["username"],"email" => $data["email"]]);
   	}
 
+  }
 
+  public function forgetPassword_Send(array $data)
+  {
+    //TODO Send Message for Password
+  }
+
+  public function forgetPassword_Verify(array $data)
+  {
+    //TODO Verify Message for Password
   }
 
 
