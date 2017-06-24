@@ -240,33 +240,52 @@
 
 		public function updateMovieData($movieID, $UseOldPoster, $Name, $Content, $ReleaseDate, $TrailerURL, $Tags, $PG)
 		{
-			$stmt = $this->pdo->prepare(
-				"UPDATE movie SET Name=?, Content=?, ReleaseDate=?, TrailerURL=?, Tags=?, PG=? WHERE ID=?"
-			);
-			$stmt->bindValue(1, $Name);
-			$stmt->bindValue(2, $Content);
-			$stmt->bindValue(3, $ReleaseDate);
-			$stmt->bindValue(4, $TrailerURL);
-			$stmt->bindValue(5, $Tags);
-			$stmt->bindValue(6, $PG);
-
-			$stmt->bindValue(7, $movieID);
-
-			$stmt->execute();
-
-			if(!$UseOldPoster)
+			try
 			{
-				if($this->uploadImageReturnStatus($movieID))
+				$this->pdo->beginTransaction();
+
+				$stmt = $this->pdo->prepare(
+					"UPDATE movie SET Name=?, Content=?, ReleaseDate=?, TrailerURL=?, Tags=?, PG=? WHERE ID=?"
+				);
+				$stmt->bindValue(1, $Name);
+				$stmt->bindValue(2, $Content);
+				$stmt->bindValue(3, $ReleaseDate);
+				$stmt->bindValue(4, $TrailerURL);
+				$stmt->bindValue(5, $Tags);
+				$stmt->bindValue(6, $PG);
+
+				$stmt->bindValue(7, $movieID);
+
+				if (!$stmt->execute())
 				{
-					$stmt = $this->pdo->prepare(
-						"UPDATE movie SET HasImage = 1 WHERE ID = ?");
-
-						$stmt->bindValue(1, $movieID);
-
-						$stmt->execute();
-
+					 throw new \PDOException();
 				}
+
+				if(!$UseOldPoster)
+				{
+					if($this->uploadImageReturnStatus($movieID))
+					{
+						$stmt = $this->pdo->prepare(
+							"UPDATE movie SET HasImage = 1 WHERE ID = ?");
+
+							$stmt->bindValue(1, $movieID);
+
+							if (!$stmt->execute())
+							{
+									throw new \PDOException();
+							}
+
+					}
+				}
+
+				$this->pdo->commit();
+
 			}
+			catch(\PDOException $e)
+      {
+          $this->pdo->rollback();
+      }
+
 
 		}
 

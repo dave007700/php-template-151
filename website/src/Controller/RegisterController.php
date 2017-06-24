@@ -97,7 +97,7 @@ class RegisterController
   {
     //TODO Send Message for Password
 
-    session_reset();
+    session_regenerate_id();
 
     if(!array_key_exists("userData", $data))
   	{
@@ -152,7 +152,7 @@ class RegisterController
   public function forgetPassword_Verify($passwordKey, array $data)
   {
     //TODO Verify Message for Password
-    session_reset();
+    session_regenerate_id();
 
     if(!array_key_exists("userData", $data))
     {

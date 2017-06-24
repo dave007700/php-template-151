@@ -28,7 +28,7 @@
 			if($stmt->rowCount() === 1 && password_verify($password, $sqlReturnValues['Password']))
 			{
 
-				session_reset();
+				session_regenerate_id();
 
 				$_SESSION["email"] = $sqlReturnValues['EMail'];
 				$_SESSION["Username"] = $sqlReturnValues['Username'];
