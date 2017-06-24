@@ -121,17 +121,17 @@ switch($_SERVER["REQUEST_URI"]) {
 
 			break;
 		}
-		else if(preg_match("|^/Password/Reset/Verify=(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
+		else if(preg_match("|^/Password/Verify=(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
 
 			$ctr = $factory->getRegisterController();
 
 			if($_SERVER["REQUEST_METHOD"] == "GET")
 			{
-				$ctr->showEntry($matches[1]);
+				$ctr->showPasswordVerify($matches[1]);
 			}
 			else
 			{
-				//$ctr->updateMovieData($matches[1], $_POST);
+				$ctr->forgetPassword_Verify($matches[1], $_POST);
 			}
 
 			break;

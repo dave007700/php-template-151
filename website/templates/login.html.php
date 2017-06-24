@@ -34,7 +34,7 @@
 				<br>
 				<a href="/register"> <button class="btn btn-lg btn-success btn-block" type="button">Register</button> </a>
 				<br>
-				<a href="/register"> <button class="btn btn-lg btn-warning btn-block" type="button">Passwort Vergessen</button> </a>
+				<a href="/Password/Reset"> <button class="btn btn-lg btn-warning btn-block" type="button">Passwort Vergessen</button> </a>
 				<br>
 				<a href="/ "> <button class="btn btn-lg btn-danger btn-block" type="button">Zurück</button> </a>
       </form>

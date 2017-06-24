@@ -82,7 +82,7 @@
 		{
 			$stmt = $this->pdo->prepare("UPDATE user SET Password=?, IsActivated=2 WHERE ID=? AND IsActivated=1");
 			$stmt->bindValue(1, password_hash($newPassword, PASSWORD_DEFAULT));
-			$stmt->bindValue(2, $UserID);
+			$stmt->bindValue(2, $userID);
 			$stmt->execute();
 		}
 

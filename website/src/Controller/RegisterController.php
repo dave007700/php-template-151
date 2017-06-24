@@ -48,7 +48,7 @@ class RegisterController
                 ->setTo([$email])
                 ->setBody(
                   "Good day " . $username . "!!!
-                   Open this link to set a new Password for your account: https://localhost/Password/Reset/Verify=" . $securityKey . "
+                   Open this link to set a new Password for your account: https://localhost/Password/Verify=" . $securityKey . "
                   If you didn't request this Password-Reset or this isn't your E-Mail... Don't worry just ignore this mail and the Resetlink will
                   expire at your next login :)
 
@@ -140,7 +140,7 @@ class RegisterController
 
     if($UserData != null)
     {
-
+      echo $this->template->render("PasswordForgot/passwordverify.html.php");
     }
     else
     {
@@ -149,12 +149,28 @@ class RegisterController
 
   }
 
-  public function forgetPassword_Verify(array $data)
+  public function forgetPassword_Verify($passwordKey, array $data)
   {
     //TODO Verify Message for Password
     session_reset();
 
-    //$restKey,
+    if(!array_key_exists("userData", $data))
+    {
+      header("location: /login");
+      return;
+    }
+
+    $UserData = $this->registerService->getUserIDOverPasswordKey($passwordKey);
+
+    if($UserData != null)
+    {
+      $this->registerService->updateUsePassword($UserData["ID"], $data["userData"]);
+      header("location: /login");
+    }
+    else
+    {
+      header("location: /Error-404");
+    }
 
   }
 
