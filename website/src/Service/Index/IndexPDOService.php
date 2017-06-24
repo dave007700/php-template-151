@@ -94,7 +94,7 @@
 
 		public function getMoveByID($MovieID)
 		{
-			$stmt = $this->pdo->prepare("SELECT m.* FROM movie m INNER JOIN comments c ON c.MovieID = m.ID WHERE m.ID = ? AND c.IsDisplayed = 1");
+			$stmt = $this->pdo->prepare("SELECT * FROM movie WHERE ID = ?");
 			$stmt->bindValue(1, $MovieID);
 			$stmt->execute();
 
