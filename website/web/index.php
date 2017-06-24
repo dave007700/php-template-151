@@ -53,6 +53,21 @@ switch($_SERVER["REQUEST_URI"]) {
 
 			break;
 		}
+	case "/Password/Reset":
+		{
+			$ctr = $factory->getRegisterController();
+
+			if($_SERVER["REQUEST_METHOD"] == "GET")
+			{
+				$ctr->showForgetPassword1();
+			}
+			else
+			{
+				$ctr->forgetPassword_Send($_POST);
+			}
+
+			break;
+		}
 
 	case"/register":
 		$ctr = $factory->getRegisterController();
@@ -103,6 +118,11 @@ switch($_SERVER["REQUEST_URI"]) {
 			{
 				$ctr->updateMovieData($matches[1], $_POST);
 			}
+
+			break;
+		}
+		else if(preg_match("|^/Password/Reset/Verify=(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
+
 
 			break;
 		}

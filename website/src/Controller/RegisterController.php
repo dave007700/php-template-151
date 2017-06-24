@@ -46,7 +46,15 @@ class RegisterController
     $message = (new \Swift_Message('Password Reset'))
                 ->setFrom(['security@losdostacos.com' => 'noreply'])
                 ->setTo([$email])
-                ->setBody("Good day " . $username . "!!! Open this link to set a new Password for your account: https://localhost/Password-Reset/verify=" . $securityKey);
+                ->setBody(
+                  "Good day " . $username . "!!!
+                   Open this link to set a new Password for your account: https://localhost/Password/Reset/Verify=" . $securityKey . "
+                  If you didn't request this Password-Reset or this isn't your E-Mail... Don't worry just ignore this mail and the Resetlink will
+                  expire at your next login :)
+
+                  Best wishes
+                  LosDosTacos-Security Team
+                  ");
 
                 $this->mailer->send($message);
   }
@@ -80,9 +88,43 @@ class RegisterController
 
   }
 
+  public function showForgetPassword1()
+  {
+    echo $this->template->render("PasswordForgot/passwordforget1.html.php");
+  }
+
   public function forgetPassword_Send(array $data)
   {
     //TODO Send Message for Password
+
+    session_reset();
+
+    if(!array_key_exists("userData", $data))
+  	{
+  		$this->showRegister();
+  		return;
+  	}
+
+    $useData = $this->registerService->getPasswordSendDataFromUser($data["userData"]);
+
+    if($useData != null)
+    {
+
+      $securityKey = $this->generateKey($useData['EMail']);
+
+      $this->registerService->setUserStatus($useData['EMail'], $securityKey);
+
+      $this->sendUserMailPassword($useData['Username'], $useData['EMail'], $securityKey);
+
+      echo "Please Check your Mail";
+      return;
+    }
+    else
+    {
+      session_destroy();
+      echo "Unknown User";
+      return;
+    }
   }
 
   public function forgetPassword_Verify(array $data)

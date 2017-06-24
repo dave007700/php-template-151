@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<link rel="stylesheet" href="CSS/login.css">
+		<link rel="stylesheet" href="../CSS/login.css">
 
 		<!-- Import Ajax From Google Servers -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -24,17 +24,11 @@
 		<div class="container">
 
       <form class="form-signin" action="" method="POST">
-        <h2 class="form-signin-heading">Please Username or E-Mail</h2>
+        <h2 class="form-signin-heading">Please Enter Data</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" name="email" id="inputEmail" class="form-control" placeholder="Email address or Username" required="true" autofocus="" value="<?= (isset($email)) ? htmlspecialchars($email) : "" ?>">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="true">
+        <input type="text" name="userData" id="inputEmail" class="form-control" placeholder="Username or E-Mail" required="true" autofocus="" value="">
 				<br>
-        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in"></input>
-				<br>
-				<a href="/register"> <button class="btn btn-lg btn-success btn-block" type="button">Register</button> </a>
-				<br>
-				<a href="/register"> <button class="btn btn-lg btn-warning btn-block" type="button">Passwort Vergessen</button> </a>
+				<input class="btn btn-lg btn-info btn-block" type="submit"></input>
 				<br>
 				<a href="/ "> <button class="btn btn-lg btn-danger btn-block" type="button">Zurück</button> </a>
       </form>

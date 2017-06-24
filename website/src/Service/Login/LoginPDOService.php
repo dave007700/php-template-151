@@ -18,7 +18,7 @@
 
 		public function authenticate($username, $password)
 		{
-			$stmt = $this->pdo->prepare("SELECT * FROM user WHERE email=? OR Username=? AND IsActivated=2");
+			$stmt = $this->pdo->prepare("SELECT * FROM user WHERE email=? OR Username=? AND IsActivated>=1");
 			$stmt->bindValue(1, $username);
 			$stmt->bindValue(2, $username);
 			$stmt->execute();
@@ -35,6 +35,13 @@
 				$_SESSION["UserRights"] = $sqlReturnValues['FK_Rights'];
 				$_SESSION['UserID'] = $sqlReturnValues['ID'];
 				$_SESSION["LogedIN"] = true;
+
+				if($sqlReturnValues['IsActivated'] == 1)
+				{
+					$stmt = $this->pdo->prepare("UPDATE user SET IsActivated=2 WHERE ID = ?");
+					$stmt->bindValue(1, $sqlReturnValues['ID']);
+					$stmt->execute();
+				}
 
 				return true;
 

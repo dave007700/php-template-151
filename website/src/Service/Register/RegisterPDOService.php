@@ -45,6 +45,31 @@
 
 		}
 
+		public function getPasswordSendDataFromUser($userData)
+		{
+			$stmt = $this->pdo->prepare("SELECT * FROM user WHERE (Username=? OR EMail=?) AND IsActivated=2");
+			$stmt->bindValue(1, $userData);
+			$stmt->bindValue(2, $userData);
+			$stmt->execute();
+
+			if($stmt->rowCount() === 1)
+			{
+				return $stmt->fetch();
+			}
+			else
+			{
+				return null;
+			}
+		}
+
+		public function setUserStatus($userID, $securityKey)
+		{
+			$stmt = $this->pdo->prepare("UPDATE user SET Resetkey=?, IsActivated=1 WHERE ID=?");
+			$stmt->bindValue(1, $securityKey);
+			$stmt->bindValue(2, $userID);
+			$stmt->execute();
+		}
+
 		public function registerUser($username, $email, $password, $securityKey)
 		{
 			if(filter_var($email, FILTER_VALIDATE_EMAIL))
@@ -53,7 +78,7 @@
 				{
 					if($this->available_Username($username))
 					{
-						//TODO: Hash the Password
+
 						try {
 
 							$stmt = $this->pdo->prepare("INSERT INTO user (username, email, password, securitykey) VALUES (?,?,?,?)");
