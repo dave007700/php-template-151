@@ -250,6 +250,8 @@
 			$stmt->bindValue(5, $Tags);
 			$stmt->bindValue(6, $PG);
 
+			$stmt->bindValue(7, $movieID);
+
 			$stmt->execute();
 
 			if(!$UseOldPoster)
@@ -259,7 +261,7 @@
 					$stmt = $this->pdo->prepare(
 						"UPDATE movie SET HasImage = 1 WHERE ID = ?");
 
-						$stmt->bindValue(1, $lastID);
+						$stmt->bindValue(1, $movieID);
 
 						$stmt->execute();
 
@@ -331,7 +333,7 @@
 	  {
 	    if($HasImage)
 	    {
-	      return $movieID . ".jpg";
+	      return $movieID . ".jpg?v=" . uniqid();
 	    }
 	    else
 	    {

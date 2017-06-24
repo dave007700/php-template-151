@@ -101,7 +101,7 @@ switch($_SERVER["REQUEST_URI"]) {
 			}
 			else
 			{
-				//$ctr->createNewEntry($_POST);
+				$ctr->updateMovieData($matches[1], $_POST);
 			}
 
 			break;

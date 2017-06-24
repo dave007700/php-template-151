@@ -154,8 +154,6 @@ class IndexController
           !array_key_exists("Entry_Tags", $data)
             OR
           !array_key_exists("Entry_PG", $data)
-            OR
-          !array_key_exists("Entry_UseImage", $data)
           )
       	{
       		header('Location: /Edit-Movie='.$movieID);
@@ -165,7 +163,8 @@ class IndexController
         $this->indexService->updateMovieData
         (
           $movieID,
-          $data["Entry_UseImage"],
+          array_key_exists("Entry_UseImage", $data),
+          $data["Entry_Name"],
           $data["Entry_Content"],
           $data["Entry_Date"],
           $data["Entry_Trailer"],

@@ -34,7 +34,7 @@
 
           <div class="thumbnail">
 
-              <form class="" action="/Update-Entry" method="POST" enctype="multipart/form-data">
+              <form class="" action="" method="POST" enctype="multipart/form-data">
 
                 <h1>Eintrag bearbeiten</b></h1>
 
