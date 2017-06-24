@@ -93,7 +93,7 @@ class RegisterController
     echo $this->template->render("PasswordForgot/passwordforget1.html.php");
   }
 
-  public function forgetPassword_Send(array $data)
+  public function forgetPassword_Send($restKey, array $data)
   {
     //TODO Send Message for Password
 
@@ -110,19 +110,26 @@ class RegisterController
     if($useData != null)
     {
 
-      $securityKey = $this->generateKey($useData['EMail']);
+      //TODO Insert Password data
+
+      $securityKey = $this->generateKey($useData['ID']);
 
       $this->registerService->setUserStatus($useData['EMail'], $securityKey);
 
       $this->sendUserMailPassword($useData['Username'], $useData['EMail'], $securityKey);
 
-      echo "Please Check your Mail";
+      echo $this->showForgetPassword1();
+
+      echo "<center> Please Check your Mail </center>";
       return;
     }
     else
     {
       session_destroy();
-      echo "Unknown User";
+
+      echo $this->showForgetPassword1();
+
+      echo "<center>Unknown User</center>";
       return;
     }
   }
@@ -130,6 +137,10 @@ class RegisterController
   public function forgetPassword_Verify(array $data)
   {
     //TODO Verify Message for Password
+    session_reset();
+
+
+
   }
 
 

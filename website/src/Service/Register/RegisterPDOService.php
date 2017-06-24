@@ -62,6 +62,31 @@
 			}
 		}
 
+		public function getUserIDOverPasswordKey($passwordKey)
+		{
+			$stmt = $this->pdo->prepare("SELECT ID FROM user WHERE Resetkey=? AND IsActivated=1");
+			$stmt->bindValue(1, $passwordKey);
+			$stmt->execute();
+
+			if($stmt->rowCount() === 1)
+			{
+				return $stmt->fetch();
+			}
+			else
+			{
+				return null;
+			}
+		}
+
+		public function updateUsePassword($newPassword, $UserID)
+		{
+			$stmt = $this->pdo->prepare("UPDATE user SET Password=?, IsActivated=2 WHERE ID=? AND IsActivated=1");
+			$stmt->bindValue(1, password_hash($newPassword, PASSWORD_DEFAULT));
+			$stmt->bindValue(2, $UserID);
+			$stmt->execute();
+		}
+
+
 		public function setUserStatus($userID, $securityKey)
 		{
 			$stmt = $this->pdo->prepare("UPDATE user SET Resetkey=?, IsActivated=1 WHERE ID=?");
