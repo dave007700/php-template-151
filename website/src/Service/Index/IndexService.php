@@ -8,6 +8,10 @@
 		public  function getMoveByID($MovieID);
 		public  function existsMovieByID($movieID);
 
+		public  function getRealPoserURL($movieID, $HasImage);
+
+		public  function updateMovieData($movieID, $UseOldPoster, $Name, $Content, $ReleaseDate, $TrailerURL, $Tags, $PG);
+
 		public  function checkIfUserComment($commentID, $userID);
 		public  function createComment($movieID, $titel, $message);
 		public  function getCommentsFromMovie($movieID);

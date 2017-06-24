@@ -46,7 +46,7 @@
               <br>
 
               <div class="col-xs-6 col-sm-2 placeholder">
-                <img src="MoviePoster/<?= htmlspecialchars($MovieData['ImageURL'])?>" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                <img src="MoviePoster/<?= htmlspecialchars($MoviePosterURL)?>" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               </div>
 
               <b>Name:</b> <?= htmlspecialchars($MovieData['Name'])?>

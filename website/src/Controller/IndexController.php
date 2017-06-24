@@ -34,7 +34,6 @@ class IndexController
     echo $this->template->render("error404.html.php", ["taskbar" => $this->indexService->getTaskBar()]);
   }
 
-
   public function showcreateNewEntry(){
     if($this->indexService->GetRights() > 1)
     {
@@ -90,7 +89,8 @@ class IndexController
         echo $this->template->render("editEntry.html.php", [
           "taskbar" => $this->indexService->getTaskBar(),
           "UserRights" => $this->indexService->GetRights(),
-          "MovieData" => $MovieData
+          "MovieData" => $MovieData,
+          "MoviePosterURL" => $this->indexService->getRealPoserURL($MovieData['ID'], $MovieData['HasImage'])
         ]);
         return;
       }
@@ -124,12 +124,70 @@ class IndexController
         "Comments" => $Comments,
         "Username" => $this->indexService->GetUsername(),
         "UserRights" => $this->indexService->GetRights(),
-        "MyUserID" => $this->indexService->GetUserID()
+        "MyUserID" => $this->indexService->GetUserID(),
+        "MoviePosterURL" => $this->indexService->getRealPoserURL($MovieData["ID"], $MovieData["HasImage"])
       ]);
     }
     else
     {
       header('Location: /Error-404');
+    }
+
+  }
+
+  public function updateMovieData($movieID, array $data)
+  {
+
+    if($this->indexService->GetRights() > 0)
+    {
+      if($this->indexService->existsMovieByID($movieID))
+      {
+        if(
+          !array_key_exists("Entry_Name", $data)
+            OR
+          !array_key_exists("Entry_Content", $data)
+            OR
+          !array_key_exists("Entry_Date", $data)
+            OR
+          !array_key_exists("Entry_Trailer", $data)
+            OR
+          !array_key_exists("Entry_Tags", $data)
+            OR
+          !array_key_exists("Entry_PG", $data)
+            OR
+          !array_key_exists("Entry_UseImage", $data)
+          )
+      	{
+      		header('Location: /Edit-Movie='.$movieID);
+      		return;
+      	}
+
+        $this->indexService->updateMovieData
+        (
+          $movieID,
+          $data["Entry_UseImage"],
+          $data["Entry_Content"],
+          $data["Entry_Date"],
+          $data["Entry_Trailer"],
+          $data["Entry_Tags"],
+          $data["Entry_PG"]
+        );
+
+        header('Location: /movie='. $movieID);
+        return;
+
+
+      }
+      else
+      {
+        header('Location: /Error-404');
+        return;
+      }
+    }
+    else
+    {
+      header('Location: /Error-404');
+      return;
     }
 
   }

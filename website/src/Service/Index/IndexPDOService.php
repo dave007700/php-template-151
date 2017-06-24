@@ -227,15 +227,44 @@
 			if($this->uploadImageReturnStatus($lastID))
 			{
 				$stmt = $this->pdo->prepare(
-					"UPDATE movie SET ImageURL = ? WHERE ID = ?");
+					"UPDATE movie SET HasImage = 1 WHERE ID = ?");
 
-					$stmt->bindValue(1, $lastID.".jpg");
-					$stmt->bindValue(2, $lastID);
+					$stmt->bindValue(1, $lastID);
 
 					$stmt->execute();
 
 			}
 
+
+		}
+
+		public function updateMovieData($movieID, $UseOldPoster, $Name, $Content, $ReleaseDate, $TrailerURL, $Tags, $PG)
+		{
+			$stmt = $this->pdo->prepare(
+				"UPDATE movie SET Name=?, Content=?, ReleaseDate=?, TrailerURL=?, Tags=?, PG=? WHERE ID=?"
+			);
+			$stmt->bindValue(1, $Name);
+			$stmt->bindValue(2, $Content);
+			$stmt->bindValue(3, $ReleaseDate);
+			$stmt->bindValue(4, $TrailerURL);
+			$stmt->bindValue(5, $Tags);
+			$stmt->bindValue(6, $PG);
+
+			$stmt->execute();
+
+			if(!$UseOldPoster)
+			{
+				if($this->uploadImageReturnStatus($movieID))
+				{
+					$stmt = $this->pdo->prepare(
+						"UPDATE movie SET HasImage = 1 WHERE ID = ?");
+
+						$stmt->bindValue(1, $lastID);
+
+						$stmt->execute();
+
+				}
+			}
 
 		}
 
@@ -296,6 +325,19 @@
 
 			return $returnValue;
 		}
+
+
+	  public function getRealPoserURL($movieID, $HasImage)
+	  {
+	    if($HasImage)
+	    {
+	      return $movieID . ".jpg";
+	    }
+	    else
+	    {
+	      return "default.jpg";
+	    }
+	  }
 
 		public function uploadImageReturnStatus($id)
 	  {
