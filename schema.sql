@@ -62,4 +62,4 @@ INSERT INTO `user` (`ID`, `Username`, `Password`, `EMail`, `IsActivated`, `Secur
 (8,	'dave',	'$2y$10$.0ibXZ4H8JSkwccSkL46L..msL3.5EmIOlZPzFXv4Kh17AJQv3k0O',	'dave007700@gmail.com',	2,	'1c716e97d899348bb2782c06ba188b7f2b9d8d90',	'291c319a914d58767ac1d652dff0135862d407a73d5ffa123484f1360613',	2),
 (9,	'SirMorsel',	'$2y$10$OriusVDP8hYrGtc73ockruktprZUw6bAU2eXTt0rJRajm.VTwN.h6',	'patrick.nibbia@gmail.com',	2,	'07bcce99ead21d9daa71021ffa53aa22b2a61fbbbeef2f91413a0e92b441',	'',	1);
 
--- 2017-06-24 12:51:33
+-- 2017-06-24 14:01:24

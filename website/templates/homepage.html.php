@@ -32,43 +32,10 @@
           <h1 class="page-header">Dashboard</h1>
 
           <div class="row placeholders">
-            <!--<div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">
-              <img src="http://www.impawards.com/2016/posters/xmen_apocalypse_ver18_xxlg.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">
-              <img src="https://s-media-cache-ak0.pinimg.com/originals/bb/ff/10/bbff106591f93093c9693f749bb12d06.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">
-              <img src="https://kaneshorrorblog.files.wordpress.com/2010/12/the_dark_knight_movie_poster.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYmqQmr5RQkvbC34FMqgoC5bgWitPlC_TgECFScsY7wkjfLlqP" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">
-              <img src="http://img.moviepostershop.com/the-magnificent-seven-movie-poster-2016-1020776374.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJBC5XK_HmO30HN3MrDxXOn5N__xm_bwDBOPcw0qpNn60o9ORH_g" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>-->
 
             <?php
-							//var_dump($Movies);
-						 	//var_dump($Movies["BackGroundImgURL"]);
 							foreach ($Movies as $key)
 							{
-								//echo var_dump($value);
 								echo '<a href="/movie='. $key["ID"] . '">';
 									echo '<div class="col-xs-6 col-sm-2 placeholder IsMovie" role="button">';
 									echo '<img src="MoviePoster/';

@@ -75,7 +75,7 @@
 
           </div>
 
-          <h2 class="sub-header">Kommentare <span class="label label-success label-as-badge"><?= $MovieData['CommentCount'] ?></span></h2>
+          <h2 class="sub-header">Kommentare <span class="label label-success label-as-badge"><?= $CommentCount ?></span></h2>
 
           <div class="thumbnail">
 						<form class="form-signin" action="/movie=<?= $MovieData['ID'] ?>" method="POST">

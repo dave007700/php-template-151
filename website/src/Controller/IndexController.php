@@ -122,6 +122,7 @@ class IndexController
         "taskbar" => $this->indexService->getTaskBar(),
         "MovieData" => $MovieData,
         "Comments" => $Comments,
+        "CommentCount" => count($Comments),
         "Username" => $this->indexService->GetUsername(),
         "UserRights" => $this->indexService->GetRights(),
         "MyUserID" => $this->indexService->GetUserID(),

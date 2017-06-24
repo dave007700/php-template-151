@@ -94,7 +94,7 @@
 
 		public function getMoveByID($MovieID)
 		{
-			$stmt = $this->pdo->prepare("SELECT m.*, Count(c.ID) as CommentCount FROM movie m INNER JOIN comments c ON c.MovieID = m.ID WHERE m.ID = ? AND c.IsDisplayed = 1");
+			$stmt = $this->pdo->prepare("SELECT m.* FROM movie m INNER JOIN comments c ON c.MovieID = m.ID WHERE m.ID = ? AND c.IsDisplayed = 1");
 			$stmt->bindValue(1, $MovieID);
 			$stmt->execute();
 
@@ -311,8 +311,7 @@
 			if($this->CheckLogin())
 			{
 				$returnValue .= '
-				<li><a href="/">Dashboard</a></li>
-				<li><a href="/Settings">Settings</a></li>';
+				<li><a href="/">Dashboard</a></li>';
 
 				if($this->GetRights() > 1)
 				{
@@ -336,9 +335,6 @@
 
 			$returnValue .= '
 						</ul>
-						<form class="navbar-form navbar-right">
-							<input type="text" class="form-control" placeholder="Search...">
-						</form>
 					</div>
 				</div>
 			</nav>
