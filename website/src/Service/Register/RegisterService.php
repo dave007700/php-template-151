@@ -8,8 +8,10 @@
 
 		public function getPasswordSendDataFromUser($userData);
 
-		public function updateUsePassword($newPassword, $UserID);
+		public function updateUsePassword($userID, $newPassword);
 		public function getUserIDOverPasswordKey($passwordKey);
+
+		public function setUserStatus($userID, $securityKey);
 	}
 
 ?>

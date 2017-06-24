@@ -59,9 +59,9 @@ class RegisterController
                 $this->mailer->send($message);
   }
 
-  private function generateKey($email)
+  private function generateKey()
   {
-    return sha1(mt_rand(10000,99999).time().$email);
+    return bin2hex(random_bytes(30));
   }
 
   public function register(array $data)
@@ -93,7 +93,7 @@ class RegisterController
     echo $this->template->render("PasswordForgot/passwordforget1.html.php");
   }
 
-  public function forgetPassword_Send($restKey, array $data)
+  public function forgetPassword_Send(array $data)
   {
     //TODO Send Message for Password
 
@@ -112,9 +112,9 @@ class RegisterController
 
       //TODO Insert Password data
 
-      $securityKey = $this->generateKey($useData['ID']);
+      $securityKey = $this->generateKey();
 
-      $this->registerService->setUserStatus($useData['EMail'], $securityKey);
+      $this->registerService->setUserStatus($useData['ID'], $securityKey);
 
       $this->sendUserMailPassword($useData['Username'], $useData['EMail'], $securityKey);
 
@@ -134,12 +134,27 @@ class RegisterController
     }
   }
 
+  public function showPasswordVerify($passwordKey)
+  {
+    $UserData = $this->registerService->getUserIDOverPasswordKey($passwordKey);
+
+    if($UserData != null)
+    {
+
+    }
+    else
+    {
+      header("location: /Error-404");
+    }
+
+  }
+
   public function forgetPassword_Verify(array $data)
   {
     //TODO Verify Message for Password
     session_reset();
 
-
+    //$restKey,
 
   }
 

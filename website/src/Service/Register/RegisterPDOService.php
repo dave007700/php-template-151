@@ -78,7 +78,7 @@
 			}
 		}
 
-		public function updateUsePassword($newPassword, $UserID)
+		public function updateUsePassword($userID, $newPassword)
 		{
 			$stmt = $this->pdo->prepare("UPDATE user SET Password=?, IsActivated=2 WHERE ID=? AND IsActivated=1");
 			$stmt->bindValue(1, password_hash($newPassword, PASSWORD_DEFAULT));
@@ -89,7 +89,7 @@
 
 		public function setUserStatus($userID, $securityKey)
 		{
-			$stmt = $this->pdo->prepare("UPDATE user SET Resetkey=?, IsActivated=1 WHERE ID=?");
+			$stmt = $this->pdo->prepare("UPDATE user SET Resetkey=?, IsActivated=1 WHERE ID=? AND IsActivated=2");
 			$stmt->bindValue(1, $securityKey);
 			$stmt->bindValue(2, $userID);
 			$stmt->execute();
