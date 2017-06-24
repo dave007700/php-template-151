@@ -13,7 +13,6 @@ class Movie
   private $MoviePoster;
   private $Tags;
   private $PG;
-  private $FK_Category;
 
   public function __construct($ID, $Name, $Content, $RealesDate, $TrailerURL, $HasImage, $MoviePoster, $Tags, $PG)
   {

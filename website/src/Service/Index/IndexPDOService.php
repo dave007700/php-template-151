@@ -210,8 +210,8 @@
 		public function createNewEntry($Name, $Content, $ReleaseDate, $TrailerURL, $Tags, $PG)
 		{
 			$stmt = $this->pdo->prepare(
-				"INSERT INTO `movie` (`Name`, `Content`, `ReleaseDate`, `TrailerURL`, `Tags`, `PG`, `FK_Category`)
-				VALUES (?, ?, ?, ?, ?, ?, 0);"
+				"INSERT INTO `movie` (`Name`, `Content`, `ReleaseDate`, `TrailerURL`, `Tags`, `PG`)
+				VALUES (?, ?, ?, ?, ?, ?);"
 			);
 			$stmt->bindValue(1, $Name);
 			$stmt->bindValue(2, $Content);
