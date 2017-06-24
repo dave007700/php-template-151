@@ -3,8 +3,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "dave007700\\": "src/",
-            "dave007700\\": "src/Entity/"
+            "dave007700\\": "src/"
         }
     },
     "require": {

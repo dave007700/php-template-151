@@ -303,10 +303,9 @@
 				return 0;
 			}
 			else
-			{ #/../../web/MoviePoster/
-				die("Die Feature with Picture not added yet");
-				die(var_dump(__DIR__ . "/../../web/MoviePoster/"));
-				move_uploaded_file($_FILES["Entry_picture"]["tmp_name"], __DIR__ . "/../../web/MoviePoster/" . $id . ".jpg");
+			{
+				$filepath = __DIR__ . "/../../../web/MoviePoster/" . (int) $id . ".jpg";
+				move_uploaded_file($_FILES["Entry_picture"]["tmp_name"], $filepath);
 				return 1;
 			}
 	  }

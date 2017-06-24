@@ -64,12 +64,12 @@ class IndexController
         $data["Entry_Content"],
         $data["Entry_Date"],
         $data["Entry_Trailer"],
-        $this->indexService->uploadImageReturnStatus($data["Entry_Name"]),
+        //$this->indexService->uploadImageReturnStatus($data["Entry_Name"]),
         $data["Entry_Tags"],
         $data["Entry_PG"]
       );
 
-      $this->homepage();
+      header('location: /');
 
     }
     else
